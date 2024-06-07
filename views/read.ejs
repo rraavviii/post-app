@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>All Posts</title>
+</head>
+
+<body>
+
+    <div class="w-full min-h-screen bg-zinc-900 text-white p-10">
+        <div class="flex w-full justify-between">
+
+            <a href="/profile" class="bg-red-500 rounded-md px-3 py-2 inline-block mb-5">Write your post</a>
+            <a class="bg-red-500 rounded-md px-3 py-2 inline-block mb-5" href="/logout">Logout</a>
+        </div>
+        
+        <% posts.forEach(function(post) { %>
+            <div class="bg-zinc-800 p-5 rounded-md mb-5">
+                <h1 class="text-xl font-bold mb-2">Post by:  <%= post.user.username %></h1>
+                <p class="text-lg"><%= post.content %></p>
+            </div>
+        <% }); %>
+    </div>
+</body>
+
+</html>
+

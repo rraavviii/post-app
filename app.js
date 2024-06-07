@@ -118,10 +118,23 @@ app.get('/like/:id',isLoggedin, async function(req,res) {
 
 app.get('/edit/:id',isLoggedin, async function(req,res) {
    let post=await postModel.findOne({_id:req.params.id}).populate('user')
-   
    res.render('edit',{post})
 
 })
+app.get('/delete/:id',isLoggedin, async function(req,res) {
+   let post=await postModel.findOneAndDelete({_id:req.params.id})
+   res.redirect('/profile')
+
+})
+
+
+app.get('/read', isLoggedin, async (req, res) => {
+   
+       let posts = await postModel.find().populate('user');
+       res.render('read', { posts });
+  
+});
+
 
 app.post('/update/:id',isLoggedin, async function(req,res) {
    let post=await postModel.findOneAndUpdate({_id:req.params.id} , {content: req.body.content})
