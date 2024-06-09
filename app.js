@@ -41,7 +41,7 @@ bcrypt.genSalt(10,(err,salt)=>{
          password: hash,
          age
       })
-      let token = jwt.sign({email:email, userId: user._id}, 'ravikumar')
+      let token = jwt.sign({email:email, userId: user._id}, 'your secret code')
       res.cookie('token', token)
       res.redirect('/login')
    })
@@ -66,7 +66,7 @@ app.post('/login', async function(req,res) {
    return res.status(500).send('somthing went wrong')
 bcrypt.compare(password,user.password,function(err,result){
    if(result){
-      let token = jwt.sign({email:email, userId: user._id}, 'ravikumar')
+      let token = jwt.sign({email:email, userId: user._id}, 'your secret code')
      
       res.cookie('token', token)
    return res.status(200).redirect('/profile')
