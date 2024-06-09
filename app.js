@@ -1,5 +1,6 @@
 const express=require('express')
 const app=express()
+const fs=require('fs')
 const path=require("path")
 const nodemailer = require("nodemailer");
 const cookieParser = require('cookie-parser')
@@ -8,6 +9,7 @@ const postModel=require('./models/post')
 let bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken');
 const { sendMail } = require('./helper/sendmail');
+const upload=require('./config/multerconfig')
 const port=5000
 
 app.set('view engine','ejs')
@@ -116,6 +118,21 @@ app.get('/like/:id',isLoggedin, async function(req,res) {
 
 
 
+app.get('/profile/upload',isLoggedin,function(req,res){
+   res.render('profileupload')
+  
+})
+
+
+app.post('/upload',isLoggedin,upload.single('image') ,async function(req,res){
+   let user=await userModel.findOne({email: req.user.email})
+   user.profilepic=req.file.filename
+   await user.save()
+   res.redirect('/profile')
+   
+  
+})
+
 app.get('/edit/:id',isLoggedin, async function(req,res) {
    let post=await postModel.findOne({_id:req.params.id}).populate('user')
    res.render('edit',{post})
@@ -142,8 +159,6 @@ app.post('/update/:id',isLoggedin, async function(req,res) {
    res.redirect('/profile')
 
 })
-
-
 
 function isLoggedin(req, res, next) {
    const token = req.cookies.token;
