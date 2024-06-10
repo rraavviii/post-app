@@ -6,50 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/profile.css">
     <title>Document</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .bg-gradient-to-br {
-            background-image: linear-gradient(to bottom right, #4a90e2, #9013fe);
-        }
-
-        .post p {
-            word-break: break-word;
-        }
-
-        .profile {
-            border-radius: 50px;
-            margin-bottom: 7px;
-
-        }
-
-        .delete {
-            border: none;
-            background-color: #9013fe;
-            border-radius: 5px;
-            padding: 5px;
-            cursor: pointer;
-        }
-    </style>
+   
 </head>
 
 <body class="bg-zinc-900 text-white p-10">
@@ -58,8 +17,7 @@
 
         <div class="flex items-start gap-3">
             <div class="w-20 h-20 ">
-                <img class="profile" src="/img/uploads/<%= user.profilepic %>" alt="">
-                <a class="border-red-500" href="/profile/upload">Edit </a>
+                <a class="border-red-500" href="/profile/upload"><img class="profile" src="/img/uploads/<%= user.profilepic %>" alt=""> </a>
             </div>
             <h3 class="text-3xl font-bold">Hey! <%= user.name %> 👋</h3>
         </div>

@@ -71,7 +71,6 @@ app.post('/login', async function(req, res) {
 
 app.get('/delete', isLoggedin,async function(req,res){
    let user=await userModel.findOneAndDelete({email: req.user.email})
-
   res.redirect('/login')
 })
 
@@ -133,7 +132,9 @@ app.get('/delete/:id', isLoggedin, async function(req, res) {
 
 app.get('/read', isLoggedin, async (req, res) => {
    let posts = await postModel.find().populate('user');
-   res.render('read', { posts });
+   let currentuser=await userModel.findOne({email:req.user.email})
+   console.log(currentuser)
+   res.render('read', { posts,currentuser });
 });
 
 app.post('/update/:id', isLoggedin, async function(req, res) {

@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, #4a90e2, #9013fe);
+}
+
+.post p {
+    word-break: break-word;
+}
+
+.profile {
+    border-radius: 50px;
+    margin-bottom: 7px;
+
+}
+
+.delete {
+    border: none;
+    background-color: #9013fe;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
