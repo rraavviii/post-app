@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const path = require("path");
+const nodemailer = require("nodemailer");
 const cookieParser = require('cookie-parser');
 const userModel = require('./models/user');
 const postModel = require('./models/post');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { sendMail } = require('./helper/sendmail');
 const upload = require('./config/multerconfig');
 const port = 5000;
 
@@ -28,6 +30,7 @@ app.post('/register', async function(req, res) {
 
    let user = await userModel.findOne({ email });
    if (user) return res.status(300).send('User already exist');
+   sendMail(email,"Welcome To our Post website ", `Hi ${name} Thank You for Registring. happy diwali`)
 
    bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
@@ -65,6 +68,13 @@ app.post('/login', async function(req, res) {
       }
    });
 });
+
+app.get('/delete', isLoggedin,async function(req,res){
+   let user=await userModel.findOneAndDelete({email: req.user.email})
+
+  res.redirect('/login')
+})
+
 
 app.get('/profile', isLoggedin, async function(req, res) {
    let user = await userModel.findOne({ email: req.user.email }).populate('posts');
