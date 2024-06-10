@@ -1,23 +1,20 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const path = require("path");
-const nodemailer = require("nodemailer");
 const cookieParser = require('cookie-parser');
-const userModel = require('./models/user');
-const postModel = require('./models/post');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { sendMail } = require('./helper/sendmail');
-const upload = require('./config/multerconfig');
-const port = 5000;
+const userModel = require('../models/user'); // Adjust the path as needed
+const postModel = require('../models/post'); // Adjust the path as needed
+const { sendMail } = require('../helper/sendmail'); // Adjust the path as needed
+const upload = require('../config/multerconfig'); // Adjust the path as needed
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -212,6 +209,4 @@ app.use((err, req, res, next) => {
    res.status(500).send('Something went wrong! Please try again later.');
 });
 
-app.listen(port, () => {
-   console.log(`Server is running on http://localhost:${port}`);
-});
+module.exports = app;
