@@ -133,7 +133,6 @@ app.get('/delete/:id', isLoggedin, async function(req, res) {
 app.get('/read', isLoggedin, async (req, res) => {
    let posts = await postModel.find().populate('user');
    let currentuser=await userModel.findOne({email:req.user.email})
-   console.log(currentuser)
    res.render('read', { posts,currentuser });
 });
 
