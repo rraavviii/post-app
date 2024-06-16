@@ -21,8 +21,8 @@
         
         <% posts.forEach(function(post) { %>
             <div class="bg-zinc-800 p-5 rounded-md mb-5">
-                <h1 class="text-xl font-bold mb-2">Post by:  <%= post.user.username %></h1>
-                <p class="text-lg"><%= post.content %></p>
+                <h1 class="text-xl font-bold mb-2 text-blue-500">Post by:  <%= post.user.username %></h1>
+                <p class="text-lg "><%= post.content %></p>
             </div>
         <% }); %>
     </div>
