@@ -193,3 +193,8 @@ img {
     font-size: 2rem;
   }
 }
+
+#register{
+  color: rgb(160, 160, 219);
+  font-size: larger;
+}

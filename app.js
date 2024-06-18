@@ -9,9 +9,10 @@ const userModel = require('./models/user');
 const postModel = require('./models/post');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { sendMail } = require('./helper/sendmail');
+
 const upload = require('./config/multerconfig');
 const key=require('./helper/generatekey')
+const {sendMail}=require('./controller/sendmail')
 const port = 5000;
 
 app.set('view engine', 'ejs');
@@ -98,6 +99,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/like/:id', isLoggedin, async function(req, res) {
+  
    let post = await postModel.findOne({ _id: req.params.id }).populate('user');
 
    if (post.likes.indexOf(req.user.userId) === -1) {
